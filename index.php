@@ -1,6 +1,16 @@
 <?php
 session_start();
 
+
+
+if (isset($_SESSION['user_id'])) {
+    $mysqli = require __DIR__ . "/database.php";
+    $sql = "SELECT * FROM USER 
+            WHERE id = {$_SESSION['user_id']}";
+    $result = $mysqli->query($sql);
+    
+}
+
 ?>
 
 
@@ -23,6 +33,7 @@ session_start();
     <p>
         You are in.
     </p>
+    <p> <a href="logout.php"> Logout.</a> </p>
     <?php else: ?>
     <p> <a href="login.php"> Login</a> or <a href="signup.html" </a>>
             SignUp
