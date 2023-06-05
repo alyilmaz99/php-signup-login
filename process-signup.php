@@ -48,5 +48,6 @@ if (!$stmt->execute()) {
         die("SQL error: " . $stmt->error . " Error number: " . $mysqli->errno);
     }  
 } else {
-    echo 'nice job';
+    header("Location: signup-succes.html");
+    exit;
 }
