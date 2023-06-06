@@ -11,10 +11,7 @@ if (isset($_SESSION['user_id'])) {
     $result = $mysqli->query($sql);
     $user = $result->fetch_assoc();
 }
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,8 +30,13 @@ if (isset($_SESSION['user_id'])) {
     <?php if(isset($user)):?>
     <p>
         You are in. <?=htmlspecialchars($user["name"]) ?>
+
+    <form action="calculate-quantity.php" method="post">
+        <input type="text" name="quantity" id="quantity" placeholder="Quantity?">
+        <input type="submit" value="Post">
+    </form>
     </p>
-    <p> <a href="logout.php"> Logout.</a> </p>
+    <p> <a href=" logout.php"> Logout.</a> </p>
     <?php else: ?>
     <p> <a href="login.php"> Login</a> or <a href="signup.html" </a>>
             SignUp
