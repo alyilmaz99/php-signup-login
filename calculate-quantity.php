@@ -13,7 +13,7 @@ $stmt = $mysqli-> stmt_init();
 if ( !$stmt->prepare($sql)) {
     die("SQL error: " . $mysqli->error);
 }
-$stmt-> bind_param("sss", $_POST["quantity"], $_SESSION['user'], $total);
+$stmt-> bind_param("sss", $_SESSION['user'],$_POST["quantity"], $total);
 
 
 if(!$stmt->execute()){
