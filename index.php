@@ -31,7 +31,7 @@ if (isset($_SESSION['user_id'])) {
     <p>
         You are in. <?=htmlspecialchars($user["name"]) ?>
 
-    <form action="calculate-quantity.php" method="post">
+    <form action="calculate-quantity.php" method="post" id="quantity">
         <input type="text" name="quantity" id="quantity" placeholder="Quantity?">
         <input type="submit" value="Post">
     </form>
