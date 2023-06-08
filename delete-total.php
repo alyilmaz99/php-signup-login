@@ -13,8 +13,7 @@ $mysqli = require __DIR__ . "/database.php";
     $basket = $basketResult->fetch_assoc();
 
 
-if ($_SESSION['delete_all']) {
-
+if (!isset($_POST["delete"]) ) {
     
     $deleteAll = "UPDATE  basket SET total = 0 WHERE user_id = {$user["id"]}";
 
@@ -29,7 +28,7 @@ if ($_SESSION['delete_all']) {
         die("SQL error: " . $stmt->error . " Error number: " . $mysqli->errno);
     }
     header("Location: index.php");
-    $_SESSION['delete_all'] = false;
+ 
     exit();
 
 } else {
@@ -48,7 +47,7 @@ if ($_SESSION['delete_all']) {
         die("SQL error: " . $stmt->error . " Error number: " . $mysqli->errno);
     }
     header("Location: index.php");
-    $_SESSION['delete_all'] = false;
+    
     exit();
     
 }

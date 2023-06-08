@@ -3,7 +3,8 @@ $is_valid = false;
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 
-
+$counter_number = 0;
+$total = 0;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $mysqli = require __DIR__ . "/database.php";
 
@@ -17,11 +18,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             session_start();
             session_regenerate_id();
             $_SESSION["user_id"] = $user["id"];
-            header("Location: index.php");
-            exit;
+           
         }
     }
     $is_valid = true;
+
+    $basketSqlCall= "SELECT * FROM basket WHERE user_id = {$user["id"]}";
+    $basketResult = $mysqli->query($basketSqlCall);
+    $basket = $basketResult->fetch_assoc();
+
+    if(!isset($basket['user_id'])){
+        $sql2 = "INSERT INTO basket(user_id, counter_number, total)
+        VALUES (?,?,?)";
+        $sql2Result = $mysqli->query($sql2);
+        $stmt = $mysqli-> stmt_init();
+
+        if ( !$stmt->prepare($sql2)) {
+            die("SQL error: " . $mysqli->error);
+        }
+        $stmt-> bind_param("sss",$user["id"],$counter_number, $total);
+        
+        
+        if(!$stmt->execute()){
+            die("SQL error: " . $stmt->error . " Error number: " . $mysqli->errno);
+        }
+    }
+    header("Location: index.php");
+            exit;
 }
 
 ?>

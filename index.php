@@ -13,6 +13,7 @@ if (isset($_SESSION['user_id'])) {
     $basketSqlCall= "SELECT * FROM basket WHERE user_id = {$user["id"]}";
     $basketResult = $mysqli->query($basketSqlCall);
     $basket = $basketResult->fetch_assoc();
+    $_SESSION['delete_all'] = true;
 }
 ?>
 
@@ -45,14 +46,16 @@ if (isset($_SESSION['user_id'])) {
         <br>
         Total: <?= htmlspecialchars($basket["total"])?>
     </p>
+
     <p>
-        <?php $_SESSION['delete_all'] = true?>
+
         <a href="delete-total.php">Clear Total</a>
     </p>
     <form action="delete-total.php" method="post" id="delete">
+
         <input type="text" name="delete" id="delete" placeholder="Delete Number?">
         <input type="submit" value="Post">
-        <?php $_SESSION['delete_all'] = false?>
+
     </form>
     <p>
         <a href=" logout.php"> Logout.</a>
