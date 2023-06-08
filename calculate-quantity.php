@@ -3,7 +3,7 @@ session_start();
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 
-$total = 0;
+
 
 if (isset($_SESSION['user_id'])) {
     $mysqli = require __DIR__ . "/database.php";
@@ -17,13 +17,16 @@ if (isset($_SESSION['user_id'])) {
     $basket = $basketResult->fetch_assoc();
     
     if(isset($basket['user_id'])){
-      $updateTable = "UPDATE basket SET counter_number = {$_POST["quantity"]} WHERE user_id = {$user["id"]}";
+      $total = $basket['total'];
+      $total += $_POST["quantity"];
+      $updateTable = "UPDATE basket SET counter_number = {$_POST["quantity"]}, total= {$total}  WHERE user_id = {$user["id"]}";
         $updateResult = $mysqli->query($updateTable);
         $stmt = $mysqli-> stmt_init();
         if ( !$stmt->prepare($updateTable)) {
             die("SQL error: " . $mysqli->error);
         }
-        $stmt-> bind_param("s",$_POST["quantity"]);
+       
+        $stmt-> bind_param("ss",$_POST["quantity"], $total);
         
         if(!$stmt->execute()){
             die("SQL error: " . $stmt->error . " Error number: " . $mysqli->errno);

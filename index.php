@@ -10,6 +10,9 @@ if (isset($_SESSION['user_id'])) {
             WHERE id = {$_SESSION['user_id']}";
     $result = $mysqli->query($sql);
     $user = $result->fetch_assoc();
+    $basketSqlCall= "SELECT * FROM basket WHERE user_id = {$user["id"]}";
+    $basketResult = $mysqli->query($basketSqlCall);
+    $basket = $basketResult->fetch_assoc();
 }
 ?>
 
@@ -36,6 +39,13 @@ if (isset($_SESSION['user_id'])) {
         <input type="submit" value="Post">
     </form>
     </p>
+
+    <p>
+        Added: <?=htmlspecialchars($basket["counter_number"]) ?>
+        <br>
+        Total: <?= htmlspecialchars($basket["total"])?>
+    </p>
+
     <p> <a href=" logout.php"> Logout.</a> </p>
     <?php else: ?>
     <p> <a href="login.php"> Login</a> or <a href="signup.html" </a>>
