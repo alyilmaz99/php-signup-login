@@ -45,8 +45,21 @@ if (isset($_SESSION['user_id'])) {
         <br>
         Total: <?= htmlspecialchars($basket["total"])?>
     </p>
+    <p>
+        <?php $_SESSION['delete_all'] = true?>
+        <a href="delete-total.php">Clear Total</a>
+    </p>
+    <form action="delete-total.php" method="post" id="delete">
+        <input type="text" name="delete" id="delete" placeholder="Delete Number?">
+        <input type="submit" value="Post">
+        <?php $_SESSION['delete_all'] = false?>
+    </form>
+    <p>
+        <a href=" logout.php"> Logout.</a>
+    </p>
 
-    <p> <a href=" logout.php"> Logout.</a> </p>
+
+
     <?php else: ?>
     <p> <a href="login.php"> Login</a> or <a href="signup.html" </a>>
             SignUp
