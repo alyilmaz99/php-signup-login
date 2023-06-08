@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             WHERE email = '%s'", $mysqli->real_escape_string( $_POST["email"]));
     $result = $mysqli->query($sql);
     $user = $result->fetch_assoc();
-
+    
     if ($user) {
         if (password_verify($_POST["password"], $user["password_hash"])) {
             session_start();
@@ -77,6 +77,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <button>Log in</button>
     </form>
+    <div>
+        <p>
+            <a href="signup.html">Sign Up</a>
+        </p>
+    </div>
 </body>
 
 </html>
