@@ -32,7 +32,7 @@ if (!isset($_POST["delete"]) ) {
     exit();
 
 } else {
-
+    
     $deleteSelected = "UPDATE basket SET total = total - {$_POST["delete"]} WHERE user_id = {$user["id"]}";
 
     $updateDelete = $mysqli->query($deleteSelected);

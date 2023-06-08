@@ -54,6 +54,9 @@ if (isset($_SESSION['user_id'])) {
         <input type="text" name="update_email" id="update_email" placeholder="<?php echo $user["email"];?>">
         <input type="submit" value="Post">
     </form>
+
+    <p> <a href="delete-profile.php"> Delete Profile</a>
+    </p>
 </body>
 
 </html>
