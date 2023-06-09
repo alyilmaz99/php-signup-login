@@ -38,6 +38,7 @@ if (isset($_SESSION['user_id']) ) {
 <body>
     <h1>Index Page</h1>
 
+
     <?php if(isset($user)):?>
     <p>
         You are in. <?=htmlspecialchars($user["name"]) ?>
@@ -67,11 +68,18 @@ if (isset($_SESSION['user_id']) ) {
     <p>
         <a href=" profile.php"> Profile</a>
     </p>
+
+    <?php if ($user['email_verified_at'] == null):?>
+    <p> Please verify your email address.
+        <a href='email-verification.php?email=<?=htmlspecialchars($user['email'])?>'> GO</a>
+    </p>
+
+    <?php else:?>
+    <p> Your email address is verified. </p>
+    <?php endif;?>
     <p>
         <a href=" logout.php"> Logout.</a>
     </p>
-
-
 
     <?php else: ?>
     <p> <a href="login.php"> Login</a> or <a href="signup.html" </a>>
