@@ -1,1 +1,12 @@
-Login ve signup ozellikleri olan, php,js,html ile hazirlanmis, mysql ile db kullanilan bir test case calismasi.
+
+-- Sign up
+-- Login
+-- Email Verification
+-- Number add with userdb
+-- Save total number with userdb
+-- Delete selected number
+-- Delete all number
+-- Profile update
+-- Profile page
+-- Log out 
+-- Basic Session examples
