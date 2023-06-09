@@ -3,19 +3,9 @@ session_start();
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 
+require_once('global.php');
 
-if (isset($_SESSION['user_id']) ) {
-    
-    if( !isset($user)){
-    $mysqli = require __DIR__ . "/database.php";
-    $sql = "SELECT * FROM user 
-            WHERE id = {$_SESSION['user_id']}";
-    $result = $mysqli->query($sql);
-    $user = $result->fetch_assoc();
-  
-    }
-    
-}
+$user = checkLogin();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
