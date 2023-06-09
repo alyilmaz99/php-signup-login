@@ -57,6 +57,8 @@ if (isset($_SESSION['user_id'])) {
 
     <p> <a href="delete-profile.php"> Delete Profile</a>
     </p>
+    <p> <a href="index.php"> Anasayfa</a>
+    </p>
 </body>
 
 </html>

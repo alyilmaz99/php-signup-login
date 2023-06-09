@@ -51,7 +51,10 @@ try {
     $mail->isHTML(true);
     $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
     $mail->Subject = "Email verification";
-    $mail->Body = '<p>Verification code: <b style="font-size: 30px;">' . $verification_code . '</b></p>';
+    $mail->Body = '<p>Verification code: <b style="font-size: 30px;">' . $verification_code . '</b>
+    </p>
+    <a href="http://localhost/phplearn/php-signup-login/email-verification.php"> Link</a>
+    ';
     $mail->send();
 
 
