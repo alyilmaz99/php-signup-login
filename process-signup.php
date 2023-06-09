@@ -43,10 +43,10 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'okethis99@gmail.com';
-    $mail->Password = 'jdeyxqggmybwxkwq';
+    $mail->Username = 'your_email_address';
+    $mail->Password = 'your_email_password';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->setFrom('okethis@gmail.com', 'Mailer');
+    $mail->setFrom('target_mail_address', 'Mailer');
     $mail->addAddress($_POST["email"], $_POST["name"]);
     $mail->isHTML(true);
     $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
