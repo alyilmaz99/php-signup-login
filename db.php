@@ -1,7 +1,9 @@
 <?php
 
+
 class DB {
     private static mysqli $db;
+
 
     private function __construct() {}
 
@@ -10,6 +12,7 @@ class DB {
         $dbname = "login_db";
         $username = "root";
         $password = "2901";
+
 
         $mysqli = new mysqli($host, $username, $password, $dbname);
         if ($mysqli->connect_errno) {
@@ -20,6 +23,7 @@ class DB {
     }
 
     public static function get() {
+
         if (!self::$db) {
             self::Init();
         }

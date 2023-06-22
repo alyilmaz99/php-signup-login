@@ -15,6 +15,7 @@ if (isset($_SESSION['user_id']) ) {
     
 }
 
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $verification_email = $_POST['verification_email'];
     $verification_code = $_POST['verification_code'];

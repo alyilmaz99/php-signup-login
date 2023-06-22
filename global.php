@@ -21,6 +21,7 @@ function checkLogin() {
     }
 
     return $user;
+
 }
 
 function getBasket()
@@ -30,4 +31,5 @@ function getBasket()
     $basketResult = DB::get()->query($basketSqlCall);
     $basket = $basketResult->fetch_assoc();
     return $basket;
+
 }
