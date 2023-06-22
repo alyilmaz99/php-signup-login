@@ -2,22 +2,20 @@
 session_start();
 ini_set('display_errors', true);
 error_reporting(E_ALL);
+require_once 'db.php';
+require_once 'global.php';
+
+DB::Init();
 
 
 if (isset($_SESSION['user_id']) ) {
-    
     if( isset($user)){
         header("Location: index.php");
         exit();
     } else {
-        $mysqli = require __DIR__ . "/database.php";
-    $sql = "SELECT * FROM user 
-            WHERE id = {$_SESSION['user_id']}";
-    $result = $mysqli->query($sql);
-    $user = $result->fetch_assoc();
-    $basketSqlCall= "SELECT * FROM basket WHERE user_id = {$user['id']}";
-    $basketResult = $mysqli->query($basketSqlCall);
-        $basket = $basketResult->fetch_assoc();
+        $mysqli = DB::get();
+        $user = checkLogin();
+        $basket = getBasket();
         $_SESSION['delete_all'] = true;
     }
     

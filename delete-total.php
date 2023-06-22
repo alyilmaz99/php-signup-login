@@ -2,14 +2,16 @@
 session_start();
 ini_set('display_errors', true);
 error_reporting(E_ALL);
+require_once 'db.php';
+DB::Init();
+$db = DB::get();
 
-$mysqli = require __DIR__ . "/database.php";
     $userRequest = "SELECT * FROM user WHERE id = {$_SESSION['user_id']}";
-    $userResult = $mysqli->query($userRequest);
+    $userResult = $db->query($userRequest);
     $user = $userResult->fetch_assoc();
 
     $basketSqlCall = "SELECT * FROM basket WHERE user_id = {$user["id"]}";
-    $basketResult = $mysqli->query($basketSqlCall);
+    $basketResult = $db->query($basketSqlCall);
     $basket = $basketResult->fetch_assoc();
 
 
@@ -17,15 +19,15 @@ if (!isset($_POST["delete"]) ) {
     
     $deleteAll = "UPDATE  basket SET total = 0 WHERE user_id = {$user["id"]}";
 
-    $updateDelete = $mysqli->query($deleteAll);
-    $stmt = $mysqli-> stmt_init();
+    $updateDelete = $db->query($deleteAll);
+    $stmt = $db-> stmt_init();
 
     if(!$stmt->prepare($deleteAll)){
-        die("SQL error: " . $mysqli->error);
+        die("SQL error: " . $db->error);
     
     }
     if(!$stmt->execute()){
-        die("SQL error: " . $stmt->error . " Error number: " . $mysqli->errno);
+        die("SQL error: " . $stmt->error . " Error number: " . $db->errno);
     }
     header("Location: index.php");
  
@@ -35,16 +37,16 @@ if (!isset($_POST["delete"]) ) {
     
     $deleteSelected = "UPDATE basket SET total = total - {$_POST["delete"]} WHERE user_id = {$user["id"]}";
 
-    $updateDelete = $mysqli->query($deleteSelected);
-    $stmt = $mysqli-> stmt_init();
+    $updateDelete = $db->query($deleteSelected);
+    $stmt = $db -> stmt_init();
     
 
     if(!$stmt->prepare($deleteSelected)){
-        die("SQL error: " . $mysqli->error);
+        die("SQL error: " . $db->error);
     
     }
     if(!$stmt->execute()){
-        die("SQL error: " . $stmt->error . " Error number: " . $mysqli->errno);
+        die("SQL error: " . $stmt->error . " Error number: " . $db->errno);
     }
     header("Location: index.php");
     

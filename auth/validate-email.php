@@ -1,6 +1,9 @@
 <?php
+require_once 'db.php';
+DB::Init();
 
-$mysqli = require __DIR__ . "/database.php";
+
+$mysqli = DB::get();
 
 $sql = sprintf(
     "SELECT * FROM user WHERE email = '%s'", $mysqli->real_escape_string($_GET["email"])

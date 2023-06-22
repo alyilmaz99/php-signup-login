@@ -2,39 +2,32 @@
 session_start();
 ini_set('display_errors', true);
 error_reporting(E_ALL);
+require_once 'db.php';
+require_once 'global.php';
 
+DB::Init();
 
 if (isset($_SESSION['user_id']) ) {
     
     if( !isset($user)){
-    $mysqli = require __DIR__ . "/database.php";
-    $sql = "SELECT * FROM user 
-            WHERE id = {$_SESSION['user_id']}";
-    $result = $mysqli->query($sql);
-    $user = $result->fetch_assoc();
-  
+        $user = checkLogin();
     }
     
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-
     $verification_email = $_POST['verification_email'];
     $verification_code = $_POST['verification_code'];
-
     if($verification_code == $user['verification_code'] && $verification_email == $user['email']) {
         $updateSql = "UPDATE user SET email_verified_at = NOW() WHERE id = {$user['id']}";
-    $result = $mysqli->query($updateSql);
-    $stmt = $mysqli-> stmt_init();
+    $result = DB::get() ->query($updateSql);
+    $stmt = DB::get()-> stmt_init();
 if (!$stmt->prepare($updateSql)) {
-    die("SQL error: " . $mysqli->error);
+    die("SQL error: " . DB::get()->error);
 }
-        
         if(!$stmt->execute()){
-            die("SQL error: " . $stmt->error . " Error number: " . $mysqli->errno);
+            die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
         }
-        
         header("Location: index.php");
         exit();
     }

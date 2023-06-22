@@ -8,9 +8,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-
+require_once 'db.php';
 require 'vendor/autoload.php';
 
+DB::Init();
 
 if (empty($_POST["name"])) {
     die("Name is required");
@@ -43,10 +44,10 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'your_email_address';
-    $mail->Password = 'your_email_password';
+    $mail->Username = 'okethis99@gmail.com';
+    $mail->Password = 'jdeyxqggmybwxkwq';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->setFrom('target_mail_address', 'Mailer');
+    $mail->setFrom('okethis@gmail.com', 'Mailer');
     $mail->addAddress($_POST["email"], $_POST["name"]);
     $mail->isHTML(true);
     $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
@@ -57,20 +58,12 @@ try {
     ';
     $mail->send();
 
-
-
-
-
     $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
-
-
-
-    $mysqli = require __DIR__ . "/database.php";
 
     $sql = "INSERT INTO user (name,email,password_hash,verification_code,email_verified_at)
         VALUES (?,?,?,?,null)";
 
-    $stmt = $mysqli->stmt_init();
+    $stmt = DB::get()->stmt_init();
 
     if (!$stmt->prepare($sql)) {
         die("SQL error: " . $mysqli->error);
@@ -79,10 +72,10 @@ try {
     $stmt->bind_param("ssss", $_POST["name"], $_POST["email"], $password_hash, $verification_code);
 
     if (!$stmt->execute()) {
-        if ($mysqli->errno === 1062) {
+        if (DB::get()->errno === 1062) {
             echo "Same email already exists";
         } else {
-            die("SQL error: " . $stmt->error . " Error number: " . $mysqli->errno);
+            die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
         }
     } else {
 
