@@ -2,14 +2,12 @@
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 
-
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require_once 'db.php';
-require 'vendor/autoload.php';
+require_once '../db.php';
+require '../vendor/autoload.php';
 
 DB::Init();
 

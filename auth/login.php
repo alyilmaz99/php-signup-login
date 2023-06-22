@@ -2,8 +2,8 @@
 $is_valid = false;
 ini_set('display_errors', true);
 error_reporting(E_ALL);
-require_once 'db.php';
-require_once 'global.php';
+require_once '../db.php';
+require_once '../global.php';
 DB::Init();
 
 $counter_number = 0;
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
         }
     }
-    header("Location: index.php");
+    header("Location: ../index.php");
             exit;
 }
 
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </form>
     <div>
         <p>
-            <a href="signup.html">Sign Up</a>
+            <a href="../signup.html">Sign Up</a>
         </p>
     </div>
 </body>

@@ -2,8 +2,8 @@
 session_start();
 ini_set('display_errors', true);
 error_reporting(E_ALL);
-require_once 'db.php';
-require_once 'global.php';
+require_once '../db.php';
+require_once '../global.php';
 
 DB::Init();
 
@@ -29,7 +29,7 @@ if (!$stmt->prepare($updateSql)) {
         if(!$stmt->execute()){
             die("SQL error: " . $stmt->error . " Error number: " . DB::get()->errno);
         }
-        header("Location: index.php");
+        header("Location: ../index.php");
         exit();
     }
 }

@@ -51,41 +51,17 @@ if (isset($_SESSION['user_id'])) {
         </tbody>
     </table>
     <h2>Update Profile</h2>
-    <form action="update-profile.php?action=updateProfile" method="post" id="profile-update">
+    <form action="update-profile.php" method="post" id="profile-update">
         <input type="text" name="update_name" id="update_name" placeholder="<?php echo $user["name"];?>">
         <input type="text" name="update_email" id="update_email" placeholder="<?php echo $user["email"];?>">
         <input type="submit" value="Post">
     </form>
 
-    <p> <a href="delete-profile.php"> Delete Profile</a>
+    <p> <a href="auth/delete-profile.php"> Delete Profile</a>
     </p>
     <p> <a href="index.php"> Anasayfa</a>
     </p>
 
-    <script>
-        let elem = document.getElementById('profile-update');
-        elem.addEventListener('submit',async e => {
-            e.preventDefault();
-            
-            let data = {
-                username: 'sadas',
-                password: '1231'
-            }
-            let response await fetch('post-handler.php?action=updateProfile', {
-                method: 'POST',
-                data: data
-            })
-
-            if (response.status) {
-                window.location.href = 'index.php';
-            }
-            else {
-                alert(response.message);
-            }
-
-        })
-
-    </script>
 </body>
 
 </html>

@@ -69,18 +69,18 @@ if (isset($_SESSION['user_id']) ) {
 
     <?php if ($user['email_verified_at'] == null):?>
     <p> Please verify your email address.
-        <a href='email-verification.php?email=<?=htmlspecialchars($user['email'])?>'> GO</a>
+        <a href='auth/email-verification.php?email=<?=htmlspecialchars($user['email'])?>'> GO</a>
     </p>
 
     <?php else:?>
     <p> Your email address is verified. </p>
     <?php endif;?>
     <p>
-        <a href=" logout.php"> Logout.</a>
+        <a href=" auth/logout.php"> Logout.</a>
     </p>
 
     <?php else: ?>
-    <p> <a href="login.php"> Login</a> or <a href="signup.html" </a>>
+    <p> <a href="auth/login.php"> Login</a> or <a href="signup.html" </a>>
             SignUp
         </a>
     </p>
